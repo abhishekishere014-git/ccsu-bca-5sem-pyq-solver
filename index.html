@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CCSU BCA 5th Sem — Solved PYQ Portal</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Inter, JetBrains Mono, Cambria Math -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#1e3a8a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Styling for rendered question math and tables */
+    .sec-title {
+      background: #f1f5f9;
+      border-left: 5px solid #1e40af;
+      padding: 8px 14px;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin: 20px 0 12px 0;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-radius: 0 6px 6px 0;
+    }
+    .dark .sec-title {
+      background: #1e293b;
+      border-left-color: #3b82f6;
+      color: #f8fafc;
+    }
+
+    .q-box {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 18px 20px;
+      margin-bottom: 18px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+      transition: all 0.2s ease;
+    }
+    .dark .q-box {
+      background: #0f172a;
+      border-color: #334155;
+      color: #cbd5e1;
+    }
+    .q-box:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+
+    .q-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 8px;
+      line-height: 1.45;
+    }
+    .dark .q-title {
+      color: #f1f5f9;
+    }
+
+    .q-marks {
+      display: inline-block;
+      background: #e0e7ff;
+      color: #3730a3;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-left: 8px;
+    }
+    .dark .q-marks {
+      background: #312e81;
+      color: #c7d2fe;
+    }
+
+    .math-box, .info-box, .diagram-card {
+      background: #f8fafc;
+      border-left: 4px solid #2563eb;
+      border-top: 1px solid #e2e8f0;
+      border-right: 1px solid #e2e8f0;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 10px 16px;
+      margin: 10px 0;
+      border-radius: 0 6px 6px 0;
+    }
+    .dark .math-box, .dark .info-box, .dark .diagram-card {
+      background: #1e293b;
+      border-color: #334155;
+      border-left-color: #3b82f6;
+    }
+
+    .formula, .math-formula {
+      font-family: 'Cambria Math', 'Times New Roman', serif;
+      font-size: 1.1rem;
+      color: #0f172a;
+      line-height: 1.6;
+      margin: 6px 0;
+    }
+    .dark .formula, .dark .math-formula {
+      color: #f8fafc;
+    }
+
+    .frac {
+      display: inline-flex;
+      flex-direction: column;
+      vertical-align: middle;
+      text-align: center;
+      font-size: 0.9em;
+      padding: 0 4px;
+      line-height: 1.1;
+    }
+    .num {
+      border-bottom: 1.5px solid currentColor;
+      padding-bottom: 2px;
+    }
+    .den {
+      padding-top: 2px;
+    }
+
+    .matrix {
+      display: inline-table;
+      vertical-align: middle;
+      border-left: 2px solid currentColor;
+      border-right: 2px solid currentColor;
+      border-radius: 4px;
+      padding: 2px 6px;
+      margin: 4px 6px;
+    }
+    .matrix td {
+      padding: 3px 8px;
+      font-family: 'Cambria Math', 'Times New Roman', serif;
+      text-align: right;
+      border: none;
+    }
+    .matrix td.divider {
+      border-left: 1.5px dashed #64748b;
+      padding-left: 10px;
+    }
+
+    table.iter-table, table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0;
+      font-size: 0.88rem;
+    }
+    table.iter-table th, table.data-table th {
+      background-color: #1e40af;
+      color: #ffffff;
+      font-weight: 700;
+      padding: 8px 12px;
+      border: 1px solid #1e3a8a;
+      text-align: left;
+    }
+    table.iter-table th {
+      text-align: center;
+    }
+    table.iter-table td, table.data-table td {
+      padding: 6px 10px;
+      border: 1px solid #cbd5e1;
+      vertical-align: top;
+    }
+    .dark table.iter-table td, .dark table.data-table td {
+      border-color: #334155;
+    }
+    table.iter-table td {
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    table.iter-table tr:nth-child(even) td, table.data-table tr:nth-child(even) td {
+      background-color: #f8fafc;
+    }
+    .dark table.iter-table tr:nth-child(even) td, .dark table.data-table tr:nth-child(even) td {
+      background-color: #1e293b;
+    }
+
+    .highlight-ans {
+      background: #ecfdf5;
+      border: 1.5px solid #10b981;
+      color: #065f46;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 6px;
+      display: inline-block;
+      margin: 8px 0;
+      font-size: 0.95rem;
+    }
+    .dark .highlight-ans {
+      background: #064e3b;
+      border-color: #059669;
+      color: #a7f3d0;
+    }
+
+    .code-box {
+      background-color: #0f172a;
+      color: #f8fafc;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      overflow-x: auto;
+      margin: 10px 0;
+      border: 1px solid #334155;
+      position: relative;
+    }
+
+    .step-label {
+      font-weight: 700;
+      color: #1e40af;
+      margin-top: 8px;
+      margin-bottom: 4px;
+    }
+    .dark .step-label {
+      color: #60a5fa;
+    }
+
+    hr {
+      border: 0;
+      border-top: 1px solid #e2e8f0;
+      margin: 16px 0;
+    }
+    .dark hr {
+      border-top-color: #334155;
+    }
+  </style>
+</head>
+
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-200 min-h-screen flex flex-col font-sans transition-colors duration-200">
+
+  <!-- TOP NAVBAR -->
+  <header class="sticky top-0 z-40 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        
+        <!-- Brand / University Info -->
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-700 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-blue-500/20">
+            <i class="fa-solid fa-graduation-cap text-lg"></i>
+          </div>
+          <div>
+            <div class="font-extrabold text-base sm:text-lg tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
+              CCSU BCA V Semester
+              <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300">Solved PYQ</span>
+            </div>
+            <p class="text-xs text-slate-500 dark:text-slate-400">All 4 Subjects &bull; 100% Solved Solutions &bull; PDF Bank</p>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex items-center gap-2 sm:gap-3">
+          <!-- Master Book Download -->
+          <button onclick="openPdfModal('pdfs/CCSU_BCA_5_SEM_ALL_SUBJECTS_SOLVED_MASTER_BOOK.pdf', 'Master Solved Book (All 4 Subjects)')" 
+            class="hidden md:flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white text-xs sm:text-sm font-semibold px-3 sm:px-4 py-2 rounded-lg shadow-sm transition">
+            <i class="fa-solid fa-book-bookmark"></i>
+            <span>Master Book (All Subjects)</span>
+          </button>
+
+          <!-- GitHub Link -->
+          <a href="https://github.com/abhishekishere014-git/ccsu-bca-5sem-pyq-solver" target="_blank"
+            class="p-2 sm:px-3 sm:py-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 transition text-sm flex items-center gap-2">
+            <i class="fa-brands fa-github text-base"></i>
+            <span class="hidden sm:inline font-medium">GitHub</span>
+          </a>
+
+          <!-- Dark Mode Toggle -->
+          <button id="themeToggle" class="p-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+            <i class="fa-solid fa-moon dark:hidden"></i>
+            <i class="fa-solid fa-sun hidden dark:inline"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="bg-gradient-to-b from-blue-50/70 via-white to-slate-50 dark:from-slate-900 dark:via-slate-950 dark:to-slate-950 border-b border-slate-200/80 dark:border-slate-800/80 py-8 sm:py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100/80 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 text-xs font-semibold mb-4">
+        <i class="fa-solid fa-circle-check text-blue-500"></i> Updated with 2025 Exam Solutions & Marking Schemes
+      </div>
+      <h1 class="text-2xl sm:text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight max-w-4xl mx-auto">
+        Chaudhary Charan Singh University <br class="hidden sm:inline">
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-teal-600">BCA 5th Semester Solved Papers</span>
+      </h1>
+      <p class="mt-3 text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+        Complete 13-question examination format: Section A (3 Marks), Section B (7.5 Marks), and Section C (15 Marks) with textbook-quality mathematical derivations, code, and diagrams.
+      </p>
+
+      <!-- SUBJECT SELECTION TABS -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-5xl mx-auto mt-8">
+        
+        <!-- DBMS -->
+        <button onclick="selectSubject('dbms')" id="btn-dbms" class="subject-card text-left p-4 rounded-xl border-2 transition-all bg-white dark:bg-slate-900 border-blue-600 dark:border-blue-500 shadow-md ring-2 ring-blue-500/20">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold px-2 py-0.5 rounded bg-blue-100 dark:bg-blue-900/60 text-blue-700 dark:text-blue-300">BCA-501</span>
+            <i class="fa-solid fa-database text-blue-600 text-lg"></i>
+          </div>
+          <div class="font-bold text-slate-900 dark:text-white mt-2 text-sm sm:text-base">DBMS</div>
+          <div class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Paper: 18021 &bull; 12 Years</div>
+        </button>
+
+        <!-- Java -->
+        <button onclick="selectSubject('java')" id="btn-java" class="subject-card text-left p-4 rounded-xl border-2 transition-all bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:border-amber-500">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold px-2 py-0.5 rounded bg-amber-100 dark:bg-amber-900/60 text-amber-700 dark:text-amber-300">BCA-502</span>
+            <i class="fa-solid fa-code text-amber-500 text-lg"></i>
+          </div>
+          <div class="font-bold text-slate-900 dark:text-white mt-2 text-sm sm:text-base">Java Programming</div>
+          <div class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Paper: 18022 &bull; 9 Years</div>
+        </button>
+
+        <!-- Networks -->
+        <button onclick="selectSubject('networks')" id="btn-networks" class="subject-card text-left p-4 rounded-xl border-2 transition-all bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:border-emerald-500">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-900/60 text-emerald-700 dark:text-emerald-300">BCA-503</span>
+            <i class="fa-solid fa-network-wired text-emerald-500 text-lg"></i>
+          </div>
+          <div class="font-bold text-slate-900 dark:text-white mt-2 text-sm sm:text-base">Computer Networks</div>
+          <div class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Paper: 18023 &bull; 9 Years</div>
+        </button>
+
+        <!-- Numerical Methods -->
+        <button onclick="selectSubject('numerical')" id="btn-numerical" class="subject-card text-left p-4 rounded-xl border-2 transition-all bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:border-indigo-500">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold px-2 py-0.5 rounded bg-indigo-100 dark:bg-indigo-900/60 text-indigo-700 dark:text-indigo-300">BCA-504</span>
+            <i class="fa-solid fa-calculator text-indigo-500 text-lg"></i>
+          </div>
+          <div class="font-bold text-slate-900 dark:text-white mt-2 text-sm sm:text-base">Numerical Methods</div>
+          <div class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Paper: 18024 &bull; 7 Years</div>
+        </button>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN APP CONTAINER -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1">
+    
+    <!-- SUBJECT BANNER & ACTIONS -->
+    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm mb-6">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-3">
+            <span id="currentSubjectCode" class="text-sm font-extrabold px-2.5 py-1 rounded-md bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">BCA-501</span>
+            <span id="currentPaperCode" class="text-xs font-medium text-slate-500 dark:text-slate-400">Paper Code: 18021</span>
+          </div>
+          <h2 id="currentSubjectTitle" class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mt-1.5">Introduction to DBMS</h2>
+          <p id="currentSubjectDesc" class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1 max-w-3xl"></p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2">
+          <!-- Download Subject Bank PDF -->
+          <button id="btnDownloadSubjectPdf" class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-semibold px-4 py-2.5 rounded-lg shadow-sm transition">
+            <i class="fa-solid fa-file-pdf"></i>
+            <span>Download Subject Solved PDF</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- YEAR PILLS -->
+      <div class="mt-6 pt-5 border-t border-slate-200 dark:border-slate-800">
+        <div class="text-xs font-semibold text-slate-500 dark:text-slate-400 mb-2.5 uppercase tracking-wider flex items-center gap-1.5">
+          <i class="fa-regular fa-calendar-check"></i> Available Examination Papers (Click to View / Download):
+        </div>
+        <div id="yearPillsContainer" class="flex flex-wrap gap-2">
+          <!-- Injected via JavaScript -->
+        </div>
+      </div>
+    </div>
+
+    <!-- SEARCH & FILTER TOOLBAR -->
+    <div class="sticky top-20 z-30 bg-slate-50/95 dark:bg-slate-950/95 backdrop-blur py-3 mb-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+      
+      <!-- Search Input -->
+      <div class="relative w-full sm:w-96">
+        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+        <input type="text" id="questionSearch" placeholder="Search questions (e.g. Bisection, JVM, 2PL, Shannon)..."
+          class="w-full pl-10 pr-4 py-2 text-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 shadow-sm">
+      </div>
+
+      <!-- Section Filter Pills -->
+      <div class="flex items-center gap-1.5 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0">
+        <button onclick="filterSection('all')" class="sec-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-blue-600 text-white shadow-sm transition" data-sec="all">All Questions (13)</button>
+        <button onclick="filterSection('sec-a')" class="sec-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:bg-slate-100 transition" data-sec="sec-a">Sec A (3M)</button>
+        <button onclick="filterSection('sec-b')" class="sec-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:bg-slate-100 transition" data-sec="sec-b">Sec B (7.5M)</button>
+        <button onclick="filterSection('sec-c')" class="sec-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:bg-slate-100 transition" data-sec="sec-c">Sec C (15M)</button>
+      </div>
+
+    </div>
+
+    <!-- QUESTIONS CONTENT CONTAINER -->
+    <div id="questionsContainer" class="space-y-4">
+      <!-- Injected via JavaScript -->
+    </div>
+
+    <!-- NO RESULTS FOUND -->
+    <div id="noResults" class="hidden text-center py-16 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl">
+      <i class="fa-solid fa-folder-open text-4xl text-slate-300 dark:text-slate-600 mb-3"></i>
+      <h3 class="text-base font-bold text-slate-800 dark:text-slate-200">No matching questions found</h3>
+      <p class="text-xs text-slate-500 mt-1">Try searching for other terms like 'formula', 'method', 'matrix', or 'algorithm'.</p>
+    </div>
+
+  </main>
+
+  <!-- PDF VIEWER MODAL -->
+  <div id="pdfModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4 hidden">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl w-full max-w-5xl h-[92vh] flex flex-col overflow-hidden border border-slate-200 dark:border-slate-800">
+      
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between px-5 py-3.5 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50">
+        <div class="flex items-center gap-2.5 overflow-hidden">
+          <i class="fa-solid fa-file-pdf text-red-500 text-lg"></i>
+          <span id="pdfModalTitle" class="font-bold text-sm sm:text-base text-slate-900 dark:text-white truncate">Paper Document</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <a id="pdfModalDownloadLink" href="#" download class="flex items-center gap-1.5 text-xs font-semibold bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-lg shadow-sm transition">
+            <i class="fa-solid fa-download"></i>
+            <span class="hidden sm:inline">Download</span>
+          </a>
+          <button onclick="closePdfModal()" class="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition">
+            <i class="fa-solid fa-xmark text-lg"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Iframe Container -->
+      <div class="flex-1 bg-slate-100 dark:bg-slate-950 relative">
+        <iframe id="pdfFrame" src="" class="w-full h-full border-0"></iframe>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-6 mt-12 text-center text-xs text-slate-500 dark:text-slate-400">
+    <div class="max-w-7xl mx-auto px-4">
+      <p>CCSU BCA 5th Semester Solved PYQ Bank &bull; All 13 Questions &bull; Formatted with Textbook Standards</p>
+      <p class="mt-1 text-slate-400 dark:text-slate-500">Built for BCA Examination Preparation &bull; Open Source on <a href="https://github.com/abhishekishere014-git/ccsu-bca-5sem-pyq-solver" class="underline hover:text-blue-500">GitHub</a></p>
+    </div>
+  </footer>
+
+  <!-- APPLICATION LOGIC -->
+  <script src="data.js"></script>
+  <script>
+    let currentSubjectKey = 'dbms';
+    let currentSectionFilter = 'all';
+
+    // Initialize Theme
+    const themeToggleBtn = document.getElementById('themeToggle');
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+
+    themeToggleBtn.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+      localStorage.theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+    });
+
+    // Select Subject
+    function selectSubject(key) {
+      currentSubjectKey = key;
+      const sub = SUBJECTS_DATA[key];
+      if (!sub) return;
+
+      // Update Tab Styles
+      ['dbms', 'java', 'networks', 'numerical'].forEach(k => {
+        const btn = document.getElementById(`btn-${k}`);
+        if (k === key) {
+          btn.className = 'subject-card text-left p-4 rounded-xl border-2 transition-all bg-white dark:bg-slate-900 border-blue-600 dark:border-blue-500 shadow-md ring-2 ring-blue-500/20';
+        } else {
+          btn.className = 'subject-card text-left p-4 rounded-xl border-2 transition-all bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:border-slate-400';
+        }
+      });
+
+      // Update Subject Banner
+      document.getElementById('currentSubjectCode').innerText = sub.code;
+      document.getElementById('currentPaperCode').innerText = `Paper Code: ${sub.paperCode}`;
+      document.getElementById('currentSubjectTitle').innerText = sub.title;
+      document.getElementById('currentSubjectDesc').innerText = sub.desc;
+      
+      const downloadBtn = document.getElementById('btnDownloadSubjectPdf');
+      downloadBtn.onclick = () => openPdfModal(sub.pdfBank, `${sub.code}: ${sub.title} (Complete PYQ Bank)`);
+
+      // Populate Year Pills
+      const pillsContainer = document.getElementById('yearPillsContainer');
+      pillsContainer.innerHTML = '';
+      sub.years.forEach(y => {
+        const pill = document.createElement('button');
+        pill.className = 'px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-blue-50 dark:bg-slate-800 dark:hover:bg-slate-700/80 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition flex items-center gap-1.5';
+        pill.innerHTML = `<i class="fa-regular fa-file-pdf text-red-500"></i> ${y.year} Paper`;
+        pill.onclick = () => openPdfModal(y.pdf, `${sub.code}: ${sub.title} — ${y.year} Solved Paper`);
+        pillsContainer.appendChild(pill);
+      });
+
+      // Load Questions HTML Content
+      renderSubjectContent(sub.contentHtml);
+    }
+
+    function renderSubjectContent(html) {
+      const container = document.getElementById('questionsContainer');
+      container.innerHTML = html;
+      
+      // Tag sections for filtering
+      let currentSection = 'sec-a';
+      Array.from(container.children).forEach(el => {
+        if (el.classList.contains('sec-title')) {
+          const txt = el.innerText.toLowerCase();
+          if (txt.includes('section – a') || txt.includes('section - a')) currentSection = 'sec-a';
+          else if (txt.includes('section – b') || txt.includes('section - b')) currentSection = 'sec-b';
+          else if (txt.includes('section – c') || txt.includes('section - c')) currentSection = 'sec-c';
+        }
+        if (el.classList.contains('q-box')) {
+          el.setAttribute('data-section', currentSection);
+        }
+      });
+
+      // Apply current filters
+      applyFilters();
+    }
+
+    // Section Filter
+    function filterSection(sec) {
+      currentSectionFilter = sec;
+      document.querySelectorAll('.sec-filter-btn').forEach(btn => {
+        if (btn.getAttribute('data-sec') === sec) {
+          btn.className = 'sec-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-blue-600 text-white shadow-sm transition';
+        } else {
+          btn.className = 'sec-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:bg-slate-100 transition';
+        }
+      });
+      applyFilters();
+    }
+
+    // Live Search & Filtering
+    document.getElementById('questionSearch').addEventListener('input', applyFilters);
+
+    function applyFilters() {
+      const query = document.getElementById('questionSearch').value.toLowerCase().trim();
+      const qBoxes = document.querySelectorAll('#questionsContainer .q-box');
+      const secTitles = document.querySelectorAll('#questionsContainer .sec-title');
+      const hrs = document.querySelectorAll('#questionsContainer hr');
+      let visibleCount = 0;
+
+      qBoxes.forEach(box => {
+        const sec = box.getAttribute('data-section');
+        const text = box.innerText.toLowerCase();
+        const matchesSection = (currentSectionFilter === 'all' || sec === currentSectionFilter);
+        const matchesQuery = (!query || text.includes(query));
+
+        if (matchesSection && matchesQuery) {
+          box.style.display = 'block';
+          visibleCount++;
+        } else {
+          box.style.display = 'none';
+        }
+      });
+
+      // Handle Section Titles visibility
+      secTitles.forEach(title => {
+        if (query) {
+          title.style.display = 'none'; // hide in search mode
+        } else if (currentSectionFilter === 'all') {
+          title.style.display = 'block';
+        } else {
+          const txt = title.innerText.toLowerCase();
+          if (
+            (currentSectionFilter === 'sec-a' && txt.includes('section – a')) ||
+            (currentSectionFilter === 'sec-b' && txt.includes('section – b')) ||
+            (currentSectionFilter === 'sec-c' && txt.includes('section – c'))
+          ) {
+            title.style.display = 'block';
+          } else {
+            title.style.display = 'none';
+          }
+        }
+      });
+
+      hrs.forEach(hr => hr.style.display = query ? 'none' : 'block');
+      document.getElementById('noResults').style.display = (visibleCount === 0) ? 'block' : 'none';
+    }
+
+    // PDF Modal
+    function openPdfModal(pdfUrl, title) {
+      document.getElementById('pdfModalTitle').innerText = title;
+      document.getElementById('pdfModalDownloadLink').href = pdfUrl;
+      document.getElementById('pdfModalDownloadLink').setAttribute('download', pdfUrl.split('/').pop());
+      document.getElementById('pdfFrame').src = pdfUrl;
+      document.getElementById('pdfModal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closePdfModal() {
+      document.getElementById('pdfModal').classList.add('hidden');
+      document.getElementById('pdfFrame').src = '';
+      document.body.style.overflow = '';
+    }
+
+    // Close on ESC
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closePdfModal();
+    });
+
+    // Boot on DBMS
+    selectSubject('dbms');
+  </script>
+
+</body>
+</html>
