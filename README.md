@@ -1,5 +1,11 @@
 # CCSU BCA 5th Semester PYQ Solver & PDF Generator Pipeline
 
+> 🌐 **Live Web Portal:** [https://abhishekishere014-git.github.io/ccsu-bca-5sem-pyq-solver/](https://abhishekishere014-git.github.io/ccsu-bca-5sem-pyq-solver/)  
+> 📖 Access all solved past year questions (2013–2025) across BCA-501, 502, 503 & 504 with instant search, section filters, and in-browser PDF previews!
+
+[![GitHub Pages Deployment](https://img.shields.io/badge/GitHub%20Pages-Live%20Online-brightgreen?style=for-the-badge&logo=github)](https://abhishekishere014-git.github.io/ccsu-bca-5sem-pyq-solver/)
+[![Repository](https://img.shields.io/badge/GitHub-Repository-blue?style=for-the-badge&logo=github)](https://github.com/abhishekishere014-git/ccsu-bca-5sem-pyq-solver)
+
 An automated suite of Python scripts and templates designed to download, OCR-extract, solve, format, and generate publication-quality examination papers for **Chaudhary Charan Singh University (CCSU)**, Meerut — **Bachelor of Computer Applications (BCA) 5th Semester**.
 
 ---
