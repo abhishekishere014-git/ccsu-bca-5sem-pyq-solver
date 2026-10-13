@@ -3,8 +3,8 @@ import re
 import subprocess
 import shutil
 
-TARGET_PDF = r"c:\zzzz\solved pyq\CCSU_BCA_5_SEM_DEDUPLICATED_PYQ_MASTER_QUESTION_BANK.pdf"
-COPY_PDF = r"c:\zzzz\pyq_solver_scripts\pdfs\CCSU_BCA_5_SEM_DEDUPLICATED_PYQ_MASTER_QUESTION_BANK.pdf"
+TARGET_PDF = r"c:\zzzz\solved pyq\BCA5_Question_Bank.pdf"
+COPY_PDF = r"c:\zzzz\pyq_solver_scripts\pdfs\BCA5_Question_Bank.pdf"
 CHROME_PATH = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
 
 files_to_load = [

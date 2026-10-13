@@ -8,10 +8,10 @@
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   
-  <!-- Google Fonts: Inter, JetBrains Mono, Cambria Math -->
+  <!-- Google Fonts: Inter, JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -22,19 +22,8 @@
       theme: {
         extend: {
           fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace'],
-          },
-          colors: {
-            brand: {
-              50: '#eff6ff',
-              100: '#dbeafe',
-              500: '#3b82f6',
-              600: '#2563eb',
-              700: '#1d4ed8',
-              800: '#1e40af',
-              900: '#1e3a8a',
-            }
+            sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
           }
         }
       }
@@ -42,449 +31,336 @@
   </script>
 
   <style>
-    /* Styling for rendered question math and tables */
+    /* Minimalist styling for questions and content */
     .sec-title {
-      background: #f1f5f9;
-      border-left: 5px solid #1e40af;
-      padding: 8px 14px;
-      font-size: 1.05rem;
-      font-weight: 800;
+      background: #f8fafc;
+      border-left: 3px solid #2563eb;
+      padding: 6px 12px;
+      font-size: 0.95rem;
+      font-weight: 700;
       color: #0f172a;
       margin: 20px 0 12px 0;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      border-radius: 0 6px 6px 0;
+      border-radius: 0 4px 4px 0;
     }
     .dark .sec-title {
       background: #1e293b;
-      border-left-color: #3b82f6;
-      color: #f8fafc;
+      border-left-color: #38bdf8;
+      color: #f1f5f9;
     }
 
     .q-box {
       background: #ffffff;
       border: 1px solid #e2e8f0;
       border-radius: 8px;
-      padding: 18px 20px;
-      margin-bottom: 18px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-      transition: all 0.2s ease;
+      padding: 16px 18px;
+      margin-bottom: 14px;
+      transition: border-color 0.15s ease;
     }
     .dark .q-box {
       background: #0f172a;
-      border-color: #334155;
+      border-color: #1e293b;
       color: #cbd5e1;
     }
     .q-box:hover {
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      border-color: #cbd5e1;
+    }
+    .dark .q-box:hover {
+      border-color: #334155;
     }
 
     .q-title {
-      font-size: 1.05rem;
+      font-size: 1rem;
       font-weight: 700;
       color: #0f172a;
       margin-bottom: 8px;
       line-height: 1.45;
     }
     .dark .q-title {
-      color: #f1f5f9;
+      color: #f8fafc;
     }
 
     .q-marks {
       display: inline-block;
-      background: #e0e7ff;
-      color: #3730a3;
-      font-size: 0.8rem;
+      background: #eff6ff;
+      color: #1d4ed8;
+      font-size: 0.75rem;
       font-weight: 700;
-      padding: 2px 8px;
+      padding: 1px 6px;
       border-radius: 4px;
-      margin-left: 8px;
+      border: 1px solid #bfdbfe;
+      margin-left: 6px;
     }
     .dark .q-marks {
-      background: #312e81;
-      color: #c7d2fe;
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border-color: rgba(56, 189, 248, 0.3);
     }
 
-    .math-box, .info-box, .diagram-card {
+    .info-box, .diagram-card, .math-box {
       background: #f8fafc;
-      border-left: 4px solid #2563eb;
-      border-top: 1px solid #e2e8f0;
-      border-right: 1px solid #e2e8f0;
-      border-bottom: 1px solid #e2e8f0;
-      padding: 10px 16px;
-      margin: 10px 0;
-      border-radius: 0 6px 6px 0;
+      border-left: 3px solid #2563eb;
+      padding: 8px 12px;
+      margin: 8px 0;
+      border-radius: 0 4px 4px 0;
+      font-size: 0.88rem;
     }
-    .dark .math-box, .dark .info-box, .dark .diagram-card {
-      background: #1e293b;
-      border-color: #334155;
-      border-left-color: #3b82f6;
+    .dark .info-box, .dark .diagram-card, .dark .math-box {
+      background: #111827;
+      border-left-color: #38bdf8;
+      color: #cbd5e1;
     }
 
-    .formula, .math-formula {
-      font-family: 'Cambria Math', 'Times New Roman', serif;
-      font-size: 1.1rem;
-      color: #0f172a;
-      line-height: 1.6;
-      margin: 6px 0;
-    }
-    .dark .formula, .dark .math-formula {
-      color: #f8fafc;
-    }
-
-    .frac {
-      display: inline-flex;
-      flex-direction: column;
-      vertical-align: middle;
-      text-align: center;
-      font-size: 0.9em;
-      padding: 0 4px;
-      line-height: 1.1;
-    }
-    .num {
-      border-bottom: 1.5px solid currentColor;
-      padding-bottom: 2px;
-    }
-    .den {
-      padding-top: 2px;
-    }
-
-    .matrix {
-      display: inline-table;
-      vertical-align: middle;
-      border-left: 2px solid currentColor;
-      border-right: 2px solid currentColor;
-      border-radius: 4px;
-      padding: 2px 6px;
-      margin: 4px 6px;
-    }
-    .matrix td {
-      padding: 3px 8px;
-      font-family: 'Cambria Math', 'Times New Roman', serif;
-      text-align: right;
-      border: none;
-    }
-    .matrix td.divider {
-      border-left: 1.5px dashed #64748b;
-      padding-left: 10px;
-    }
-
-    table.iter-table, table.data-table {
+    table.data-table, table.iter-table, table.grid-table {
       width: 100%;
       border-collapse: collapse;
-      margin: 12px 0;
-      font-size: 0.88rem;
+      margin: 8px 0;
+      font-size: 0.82rem;
     }
-    table.iter-table th, table.data-table th {
-      background-color: #1e40af;
-      color: #ffffff;
+    table.data-table th, table.iter-table th, table.grid-table th {
+      background: #f1f5f9;
+      color: #0f172a;
       font-weight: 700;
-      padding: 8px 12px;
-      border: 1px solid #1e3a8a;
+      padding: 5px 8px;
+      border: 1px solid #cbd5e1;
       text-align: left;
     }
-    table.iter-table th {
-      text-align: center;
-    }
-    table.iter-table td, table.data-table td {
-      padding: 6px 10px;
-      border: 1px solid #cbd5e1;
-      vertical-align: top;
-    }
-    .dark table.iter-table td, .dark table.data-table td {
+    .dark table.data-table th, .dark table.iter-table th, .dark table.grid-table th {
+      background: #1e293b;
+      color: #f8fafc;
       border-color: #334155;
     }
-    table.iter-table td {
-      text-align: center;
-      font-family: 'JetBrains Mono', monospace;
+    table.data-table td, table.iter-table td, table.grid-table td {
+      padding: 5px 8px;
+      border: 1px solid #e2e8f0;
+      vertical-align: top;
     }
-    table.iter-table tr:nth-child(even) td, table.data-table tr:nth-child(even) td {
-      background-color: #f8fafc;
+    .dark table.data-table td, .dark table.iter-table td, .dark table.grid-table td {
+      border-color: #1e293b;
     }
-    .dark table.iter-table tr:nth-child(even) td, .dark table.data-table tr:nth-child(even) td {
-      background-color: #1e293b;
+    table.data-table tr:nth-child(even) td, table.iter-table tr:nth-child(even) td {
+      background: #fbfcfd;
     }
-
-    .highlight-ans {
-      background: #ecfdf5;
-      border: 1.5px solid #10b981;
-      color: #065f46;
-      font-weight: 700;
-      padding: 5px 12px;
-      border-radius: 6px;
-      display: inline-block;
-      margin: 8px 0;
-      font-size: 0.95rem;
-    }
-    .dark .highlight-ans {
-      background: #064e3b;
-      border-color: #059669;
-      color: #a7f3d0;
+    .dark table.data-table tr:nth-child(even) td, .dark table.iter-table tr:nth-child(even) td {
+      background: #131d31;
     }
 
-    .code-box {
+    .code-box, pre {
       background-color: #0f172a;
       color: #f8fafc;
-      padding: 12px 16px;
-      border-radius: 8px;
+      padding: 10px 14px;
+      border-radius: 6px;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.88rem;
-      line-height: 1.5;
+      font-size: 0.82rem;
+      line-height: 1.45;
       overflow-x: auto;
-      margin: 10px 0;
-      border: 1px solid #334155;
-      position: relative;
+      margin: 8px 0;
+      border: 1px solid #1e293b;
     }
 
-    .step-label {
-      font-weight: 700;
-      color: #1e40af;
-      margin-top: 8px;
-      margin-bottom: 4px;
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      background: #f1f5f9;
+      color: #0f172a;
+      padding: 1px 4px;
+      border-radius: 3px;
     }
-    .dark .step-label {
-      color: #60a5fa;
+    .dark code {
+      background: #1e293b;
+      color: #38bdf8;
+    }
+    pre code {
+      background: transparent;
+      color: #f8fafc;
+      padding: 0;
     }
 
     hr {
       border: 0;
       border-top: 1px solid #e2e8f0;
-      margin: 16px 0;
+      margin: 14px 0;
     }
     .dark hr {
-      border-top-color: #334155;
+      border-top-color: #1e293b;
     }
   </style>
 </head>
 
-<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-200 min-h-screen flex flex-col font-sans transition-colors duration-200">
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-200 min-h-screen flex flex-col font-sans transition-colors duration-150">
 
-  <!-- TOP NAVBAR -->
-  <header class="sticky top-0 z-40 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16">
-        
-        <!-- Brand / University Info -->
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-700 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-blue-500/20">
-            <i class="fa-solid fa-graduation-cap text-lg"></i>
-          </div>
-          <div>
-            <div class="font-extrabold text-base sm:text-lg tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
-              CCSU BCA V Semester
-              <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300">Solved PYQ</span>
-            </div>
-            <p class="text-xs text-slate-500 dark:text-slate-400">All 4 Subjects &bull; 100% Solved Solutions &bull; PDF Bank</p>
-          </div>
+  <!-- MINIMAL NAVBAR -->
+  <header class="sticky top-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur border-b border-slate-200 dark:border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
+      
+      <!-- Logo / Title -->
+      <div class="flex items-center gap-2.5">
+        <span class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white font-black text-sm">
+          5
+        </span>
+        <div class="flex items-center gap-2">
+          <span class="font-bold text-sm sm:text-base text-slate-900 dark:text-white tracking-tight">CCSU BCA 5th Sem</span>
+          <span class="hidden sm:inline-block text-[10px] font-bold px-1.5 py-0.5 rounded bg-blue-50 dark:bg-blue-950 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-900">PYQ 2013–2025</span>
         </div>
-
-          <!-- Master Deduplicated Question Bank Buttons -->
-          <div class="hidden sm:flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl border border-slate-200 dark:border-slate-700">
-            <button onclick="openPdfModal('pdfs/CCSU_BCA_5_SEM_DEDUPLICATED_PYQ_MASTER_QUESTION_BANK.pdf', 'Master Deduplicated Question Bank (Standard Edition)')" 
-              class="flex items-center gap-1.5 bg-white dark:bg-slate-900 hover:bg-slate-50 text-slate-800 dark:text-slate-100 text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm border border-slate-200 dark:border-slate-700 transition">
-              <i class="fa-solid fa-file-pdf text-purple-600"></i>
-              <span>Deduplicated PYQ</span>
-            </button>
-            <button onclick="openPdfModal('pdfs/CCSU_BCA_5_SEM_DEDUPLICATED_PYQ_MASTER_QUESTION_BANK_EYE_COMFORT_DARK_EDITION.pdf', 'Master Deduplicated Question Bank (🌙 Eye-Comfort Night Edition)')" 
-              class="flex items-center gap-1.5 bg-gradient-to-r from-slate-900 to-indigo-950 hover:from-slate-800 hover:to-indigo-900 text-sky-400 text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm border border-slate-700 transition">
-              <i class="fa-solid fa-moon text-amber-400"></i>
-              <span>Eye-Comfort (Dark)</span>
-            </button>
-          </div>
-
-          <!-- Master Book Download -->
-          <button onclick="openPdfModal('pdfs/CCSU_BCA_5_SEM_ALL_SUBJECTS_SOLVED_MASTER_BOOK.pdf', 'Master Solved Book (All 4 Subjects)')" 
-            class="hidden md:flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white text-xs sm:text-sm font-semibold px-3 sm:px-4 py-2 rounded-lg shadow-sm transition">
-            <i class="fa-solid fa-book-bookmark"></i>
-            <span>Master Book</span>
-          </button>
-
-          <!-- GitHub Link -->
-          <a href="https://github.com/abhishekishere014-git/ccsu-bca-5sem-pyq-solver" target="_blank"
-            class="p-2 sm:px-3 sm:py-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 transition text-sm flex items-center gap-2">
-            <i class="fa-brands fa-github text-base"></i>
-            <span class="hidden sm:inline font-medium">GitHub</span>
-          </a>
-
-          <!-- Dark Mode Toggle -->
-          <button id="themeToggle" class="p-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
-            <i class="fa-solid fa-moon dark:hidden"></i>
-            <i class="fa-solid fa-sun hidden dark:inline"></i>
-          </button>
-        </div>
-
       </div>
+
+      <!-- Quick Actions -->
+      <div class="flex items-center gap-2">
+        <button onclick="openPdfModal('pdfs/BCA5_Question_Bank.pdf', 'Master Deduplicated Question Bank (Year Stamped)')" 
+          class="flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-3 py-1.5 rounded-md shadow-sm transition">
+          <i class="fa-solid fa-file-pdf"></i>
+          <span>Question Bank</span>
+        </button>
+
+        <button onclick="openPdfModal('pdfs/BCA5_Master_Solved.pdf', 'Master Solved Book (All 4 Subjects)')" 
+          class="hidden sm:flex items-center gap-1.5 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold px-3 py-1.5 rounded-md transition">
+          <i class="fa-solid fa-book-bookmark"></i>
+          <span>Master Book</span>
+        </button>
+
+        <a href="https://github.com/abhishekishere014-git/ccsu-bca-5sem-pyq-solver" target="_blank"
+          class="p-1.5 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white rounded-md transition text-sm">
+          <i class="fa-brands fa-github text-base"></i>
+        </a>
+
+        <button id="themeToggle" class="p-1.5 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white rounded-md transition text-sm">
+          <i class="fa-solid fa-moon dark:hidden"></i>
+          <i class="fa-solid fa-sun hidden dark:inline"></i>
+        </button>
+      </div>
+
     </div>
   </header>
 
-  <!-- HERO SECTION -->
-  <section class="bg-gradient-to-b from-blue-50/70 via-white to-slate-50 dark:from-slate-900 dark:via-slate-950 dark:to-slate-950 border-b border-slate-200/80 dark:border-slate-800/80 py-8 sm:py-12">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-100/90 dark:bg-purple-950/70 border border-purple-200 dark:border-purple-800 text-purple-700 dark:text-purple-300 text-xs font-bold mb-4">
-        <i class="fa-solid fa-fire text-amber-500"></i> NEW: Deduplicated Master Question Bank with Year Stamps (All 37 Papers)
-      </div>
-      <h1 class="text-2xl sm:text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight max-w-4xl mx-auto">
-        Chaudhary Charan Singh University <br class="hidden sm:inline">
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-teal-600">BCA 5th Semester Solved Papers</span>
+  <!-- MINIMAL HERO SECTION -->
+  <section class="py-8 sm:py-10 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+        BCA 5th Semester Examination Solver
       </h1>
-      <p class="mt-3 text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-        Complete 13-question examination format: Section A (3 Marks), Section B (7.5 Marks), and Section C (15 Marks) with textbook-quality mathematical derivations, code, and diagrams.
+      <p class="mt-2 text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-xl mx-auto">
+        All 4 Subjects &bull; 37 Genuine University Exam Papers (2013&ndash;2025) &bull; Deduplicated Question Bank with Year Stamps
       </p>
 
-      <!-- QUICK MASTER DOWNLOAD BANNER -->
-      <div class="mt-6 inline-flex flex-wrap items-center justify-center gap-3 bg-gradient-to-r from-purple-50 via-indigo-50 to-blue-50 dark:from-purple-950/30 dark:via-indigo-950/30 dark:to-blue-950/30 border border-purple-200 dark:border-purple-800/60 p-3 sm:p-4 rounded-2xl shadow-sm">
-        <span class="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2">
-          <i class="fa-solid fa-layer-group text-purple-600 text-lg"></i>
-          Master Deduplicated Question Bank (2013–2025):
-        </span>
-        <button onclick="openPdfModal('pdfs/CCSU_BCA_5_SEM_DEDUPLICATED_PYQ_MASTER_QUESTION_BANK.pdf', 'Master Deduplicated Question Bank (Standard Edition)')"
-          class="bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs sm:text-sm px-4 py-1.5 rounded-lg shadow transition flex items-center gap-2">
-          <i class="fa-solid fa-file-pdf"></i> Standard Print Edition
+      <!-- Primary Action Buttons -->
+      <div class="mt-5 flex flex-wrap items-center justify-center gap-2.5">
+        <button onclick="openPdfModal('pdfs/BCA5_Question_Bank.pdf', 'Master Deduplicated Question Bank (Year Stamped)')"
+          class="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 dark:bg-blue-600 dark:hover:bg-blue-500 text-white text-xs sm:text-sm font-bold px-4 py-2 rounded-lg shadow-sm transition">
+          <i class="fa-solid fa-file-pdf text-red-400"></i>
+          <span>Deduplicated Question Bank (65 Pages)</span>
         </button>
-        <button onclick="openPdfModal('pdfs/CCSU_BCA_5_SEM_DEDUPLICATED_PYQ_MASTER_QUESTION_BANK_EYE_COMFORT_DARK_EDITION.pdf', 'Master Deduplicated Question Bank (🌙 Eye-Comfort Night Edition)')"
-          class="bg-slate-900 hover:bg-slate-800 text-sky-400 font-bold text-xs sm:text-sm px-4 py-1.5 rounded-lg shadow border border-slate-700 transition flex items-center gap-2">
-          <i class="fa-solid fa-moon text-amber-400"></i> 🌙 Eye-Comfort Night Edition
+        <button onclick="openPdfModal('pdfs/BCA5_Master_Solved.pdf', 'Master Solved Book (All 4 Subjects)')"
+          class="flex items-center gap-2 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 text-xs sm:text-sm font-semibold px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 transition">
+          <i class="fa-solid fa-book text-emerald-500"></i>
+          <span>Master Solved Book (125 Pages)</span>
         </button>
       </div>
 
-      <!-- SUBJECT SELECTION TABS -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-5xl mx-auto mt-8">
-        
-        <!-- DBMS -->
-        <button onclick="selectSubject('dbms')" id="btn-dbms" class="subject-card text-left p-4 rounded-xl border-2 transition-all bg-white dark:bg-slate-900 border-blue-600 dark:border-blue-500 shadow-md ring-2 ring-blue-500/20">
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-bold px-2 py-0.5 rounded bg-blue-100 dark:bg-blue-900/60 text-blue-700 dark:text-blue-300">BCA-501</span>
-            <i class="fa-solid fa-database text-blue-600 text-lg"></i>
-          </div>
-          <div class="font-bold text-slate-900 dark:text-white mt-2 text-sm sm:text-base">DBMS</div>
-          <div class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Paper: 18021 &bull; 12 Years</div>
-        </button>
-
-        <!-- Java -->
-        <button onclick="selectSubject('java')" id="btn-java" class="subject-card text-left p-4 rounded-xl border-2 transition-all bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:border-amber-500">
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-bold px-2 py-0.5 rounded bg-amber-100 dark:bg-amber-900/60 text-amber-700 dark:text-amber-300">BCA-502</span>
-            <i class="fa-solid fa-code text-amber-500 text-lg"></i>
-          </div>
-          <div class="font-bold text-slate-900 dark:text-white mt-2 text-sm sm:text-base">Java Programming</div>
-          <div class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Paper: 18022 &bull; 9 Years</div>
-        </button>
-
-        <!-- Networks -->
-        <button onclick="selectSubject('networks')" id="btn-networks" class="subject-card text-left p-4 rounded-xl border-2 transition-all bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:border-emerald-500">
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-bold px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-900/60 text-emerald-700 dark:text-emerald-300">BCA-503</span>
-            <i class="fa-solid fa-network-wired text-emerald-500 text-lg"></i>
-          </div>
-          <div class="font-bold text-slate-900 dark:text-white mt-2 text-sm sm:text-base">Computer Networks</div>
-          <div class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Paper: 18023 &bull; 9 Years</div>
-        </button>
-
-        <!-- Numerical Methods -->
-        <button onclick="selectSubject('numerical')" id="btn-numerical" class="subject-card text-left p-4 rounded-xl border-2 transition-all bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:border-indigo-500">
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-bold px-2 py-0.5 rounded bg-indigo-100 dark:bg-indigo-900/60 text-indigo-700 dark:text-indigo-300">BCA-504</span>
-            <i class="fa-solid fa-calculator text-indigo-500 text-lg"></i>
-          </div>
-          <div class="font-bold text-slate-900 dark:text-white mt-2 text-sm sm:text-base">Numerical Methods</div>
-          <div class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Paper: 18024 &bull; 7 Years</div>
-        </button>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- MAIN APP CONTAINER -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1">
-    
-    <!-- SUBJECT BANNER & ACTIONS -->
-    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm mb-6">
-      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div>
-          <div class="flex items-center gap-3">
-            <span id="currentSubjectCode" class="text-sm font-extrabold px-2.5 py-1 rounded-md bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">BCA-501</span>
-            <span id="currentPaperCode" class="text-xs font-medium text-slate-500 dark:text-slate-400">Paper Code: 18021</span>
-          </div>
-          <h2 id="currentSubjectTitle" class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mt-1.5">Introduction to DBMS</h2>
-          <p id="currentSubjectDesc" class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1 max-w-3xl"></p>
-        </div>
-
-        <div class="flex flex-wrap items-center gap-2">
-          <!-- Download Subject Bank PDF -->
-          <button id="btnDownloadSubjectPdf" class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-semibold px-4 py-2.5 rounded-lg shadow-sm transition">
-            <i class="fa-solid fa-file-pdf"></i>
-            <span>Download Subject Solved PDF</span>
+      <!-- MINIMAL SUBJECT SEGMENTED TABS -->
+      <div class="mt-8 flex justify-center">
+        <div class="inline-flex p-1 bg-slate-100 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 max-w-full overflow-x-auto">
+          <button onclick="selectSubject('dbms')" id="btn-dbms" class="sub-tab px-3.5 py-1.5 rounded-lg text-xs font-bold transition whitespace-nowrap bg-white dark:bg-slate-900 text-blue-600 dark:text-blue-400 shadow-sm">
+            DBMS <span class="opacity-60 text-[10px] font-normal">(501)</span>
+          </button>
+          <button onclick="selectSubject('java')" id="btn-java" class="sub-tab px-3.5 py-1.5 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition whitespace-nowrap">
+            Java <span class="opacity-60 text-[10px] font-normal">(502)</span>
+          </button>
+          <button onclick="selectSubject('networks')" id="btn-networks" class="sub-tab px-3.5 py-1.5 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition whitespace-nowrap">
+            Networks <span class="opacity-60 text-[10px] font-normal">(503)</span>
+          </button>
+          <button onclick="selectSubject('numerical')" id="btn-numerical" class="sub-tab px-3.5 py-1.5 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition whitespace-nowrap">
+            Numerical Methods <span class="opacity-60 text-[10px] font-normal">(504)</span>
           </button>
         </div>
       </div>
 
-      <!-- YEAR PILLS -->
-      <div class="mt-6 pt-5 border-t border-slate-200 dark:border-slate-800">
-        <div class="text-xs font-semibold text-slate-500 dark:text-slate-400 mb-2.5 uppercase tracking-wider flex items-center gap-1.5">
-          <i class="fa-regular fa-calendar-check"></i> Available Examination Papers (Click to View / Download):
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT CONTAINER -->
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 py-6 flex-1 w-full">
+    
+    <!-- SUBJECT TOOLBAR -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 mb-4 border-b border-slate-200 dark:border-slate-800">
+      <div>
+        <div class="flex items-center gap-2">
+          <span id="currentSubjectCode" class="text-xs font-black px-2 py-0.5 rounded bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300">BCA-501</span>
+          <h2 id="currentSubjectTitle" class="text-base sm:text-lg font-bold text-slate-900 dark:text-white">Introduction to DBMS</h2>
+          <span id="currentPaperCode" class="text-[11px] text-slate-400">(Code: 18021)</span>
         </div>
-        <div id="yearPillsContainer" class="flex flex-wrap gap-2">
-          <!-- Injected via JavaScript -->
-        </div>
+        <p id="currentSubjectDesc" class="text-xs text-slate-500 dark:text-slate-400 mt-0.5 line-clamp-1"></p>
+      </div>
+
+      <div>
+        <button id="btnDownloadSubjectPdf" class="flex items-center gap-1.5 bg-slate-900 hover:bg-slate-800 dark:bg-slate-800 dark:hover:bg-slate-700 text-white text-xs font-semibold px-3 py-1.5 rounded-md transition shadow-sm">
+          <i class="fa-solid fa-download text-xs text-slate-400"></i>
+          <span>Download Subject PDF</span>
+        </button>
       </div>
     </div>
 
-    <!-- SEARCH & FILTER TOOLBAR -->
-    <div class="sticky top-20 z-30 bg-slate-50/95 dark:bg-slate-950/95 backdrop-blur py-3 mb-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+    <!-- YEAR SELECTOR -->
+    <div class="mb-5">
+      <div class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-2">Examination Papers:</div>
+      <div id="yearPillsContainer" class="flex flex-wrap gap-1.5">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+
+    <!-- SEARCH & SECTION FILTER -->
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-2.5 mb-5">
       
       <!-- Search Input -->
-      <div class="relative w-full sm:w-96">
-        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
-        <input type="text" id="questionSearch" placeholder="Search questions (e.g. Bisection, JVM, 2PL, Shannon)..."
-          class="w-full pl-10 pr-4 py-2 text-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 shadow-sm">
+      <div class="relative w-full sm:w-80">
+        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+        <input type="text" id="questionSearch" placeholder="Search questions..."
+          class="w-full pl-8 pr-3 py-1.5 text-xs bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg focus:outline-none focus:border-blue-500 dark:focus:border-blue-400">
       </div>
 
       <!-- Section Filter Pills -->
-      <div class="flex items-center gap-1.5 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0">
-        <button onclick="filterSection('all')" class="sec-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-blue-600 text-white shadow-sm transition" data-sec="all">All Questions (13)</button>
-        <button onclick="filterSection('sec-a')" class="sec-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:bg-slate-100 transition" data-sec="sec-a">Sec A (3M)</button>
-        <button onclick="filterSection('sec-b')" class="sec-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:bg-slate-100 transition" data-sec="sec-b">Sec B (7.5M)</button>
-        <button onclick="filterSection('sec-c')" class="sec-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:bg-slate-100 transition" data-sec="sec-c">Sec C (15M)</button>
+      <div class="flex items-center gap-1 overflow-x-auto w-full sm:w-auto">
+        <button onclick="filterSection('all')" class="sec-filter-btn px-2.5 py-1 rounded text-xs font-semibold bg-blue-600 text-white shadow-sm transition" data-sec="all">All (13)</button>
+        <button onclick="filterSection('sec-a')" class="sec-filter-btn px-2.5 py-1 rounded text-xs font-medium bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 transition" data-sec="sec-a">Sec A (3M)</button>
+        <button onclick="filterSection('sec-b')" class="sec-filter-btn px-2.5 py-1 rounded text-xs font-medium bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 transition" data-sec="sec-b">Sec B (7.5M)</button>
+        <button onclick="filterSection('sec-c')" class="sec-filter-btn px-2.5 py-1 rounded text-xs font-medium bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 transition" data-sec="sec-c">Sec C (15M)</button>
       </div>
 
     </div>
 
-    <!-- QUESTIONS CONTENT CONTAINER -->
-    <div id="questionsContainer" class="space-y-4">
-      <!-- Injected via JavaScript -->
+    <!-- QUESTIONS FEED CONTAINER -->
+    <div id="questionsContainer" class="space-y-3">
+      <!-- Injected dynamically via JavaScript -->
     </div>
 
-    <!-- NO RESULTS FOUND -->
-    <div id="noResults" class="hidden text-center py-16 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl">
-      <i class="fa-solid fa-folder-open text-4xl text-slate-300 dark:text-slate-600 mb-3"></i>
-      <h3 class="text-base font-bold text-slate-800 dark:text-slate-200">No matching questions found</h3>
-      <p class="text-xs text-slate-500 mt-1">Try searching for other terms like 'formula', 'method', 'matrix', or 'algorithm'.</p>
+    <!-- Empty Search State -->
+    <div id="noResults" class="hidden text-center py-12">
+      <i class="fa-solid fa-magnifying-glass text-slate-300 dark:text-slate-600 text-2xl mb-2"></i>
+      <p class="text-sm text-slate-500 dark:text-slate-400">No questions found matching your query.</p>
     </div>
 
   </main>
 
-  <!-- PDF VIEWER MODAL -->
-  <div id="pdfModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4 hidden">
-    <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl w-full max-w-5xl h-[92vh] flex flex-col overflow-hidden border border-slate-200 dark:border-slate-800">
+  <!-- PDF MODAL -->
+  <div id="pdfModal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4">
+    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-2xl w-full max-w-5xl h-[92vh] flex flex-col overflow-hidden">
       
       <!-- Modal Header -->
-      <div class="flex items-center justify-between px-5 py-3.5 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50">
-        <div class="flex items-center gap-2.5 overflow-hidden">
-          <i class="fa-solid fa-file-pdf text-red-500 text-lg"></i>
-          <span id="pdfModalTitle" class="font-bold text-sm sm:text-base text-slate-900 dark:text-white truncate">Paper Document</span>
+      <div class="px-4 py-3 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50 dark:bg-slate-900">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-file-pdf text-red-500"></i>
+          <span id="pdfModalTitle" class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white truncate max-w-xs sm:max-w-md">Document Viewer</span>
         </div>
         <div class="flex items-center gap-2">
-          <a id="pdfModalDownloadLink" href="#" download class="flex items-center gap-1.5 text-xs font-semibold bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-lg shadow-sm transition">
+          <a id="pdfModalDownloadLink" href="#" download class="text-xs font-semibold px-2.5 py-1 rounded bg-blue-600 hover:bg-blue-700 text-white transition flex items-center gap-1.5">
             <i class="fa-solid fa-download"></i>
-            <span class="hidden sm:inline">Download</span>
+            <span>Download</span>
           </a>
-          <button onclick="closePdfModal()" class="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition">
-            <i class="fa-solid fa-xmark text-lg"></i>
+          <button onclick="closePdfModal()" class="text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 p-1 rounded transition text-sm">
+            <i class="fa-solid fa-xmark"></i>
           </button>
         </div>
       </div>
 
-      <!-- Iframe Container -->
+      <!-- Modal Body (PDF Embed) -->
       <div class="flex-1 bg-slate-100 dark:bg-slate-950 relative">
         <iframe id="pdfFrame" src="" class="w-full h-full border-0"></iframe>
       </div>
@@ -492,21 +368,21 @@
     </div>
   </div>
 
-  <!-- FOOTER -->
-  <footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-6 mt-12 text-center text-xs text-slate-500 dark:text-slate-400">
-    <div class="max-w-7xl mx-auto px-4">
-      <p>CCSU BCA 5th Semester Solved PYQ Bank &bull; All 13 Questions &bull; Formatted with Textbook Standards</p>
-      <p class="mt-1 text-slate-400 dark:text-slate-500">Built for BCA Examination Preparation &bull; Open Source on <a href="https://github.com/abhishekishere014-git/ccsu-bca-5sem-pyq-solver" class="underline hover:text-blue-500">GitHub</a></p>
+  <!-- MINIMAL FOOTER -->
+  <footer class="border-t border-slate-200 dark:border-slate-800 py-5 text-center text-xs text-slate-400 dark:text-slate-500">
+    <div class="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+      <div>CCSU BCA 5th Semester &bull; Complete Past Year Question Bank</div>
+      <div>Open Source &bull; Hosted on GitHub Pages</div>
     </div>
   </footer>
 
-  <!-- APPLICATION LOGIC -->
+  <!-- SCRIPT -->
   <script src="data.js"></script>
   <script>
     let currentSubjectKey = 'dbms';
     let currentSectionFilter = 'all';
 
-    // Initialize Theme
+    // Theme Toggle
     const themeToggleBtn = document.getElementById('themeToggle');
     if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       document.documentElement.classList.add('dark');
@@ -529,15 +405,15 @@
       ['dbms', 'java', 'networks', 'numerical'].forEach(k => {
         const btn = document.getElementById(`btn-${k}`);
         if (k === key) {
-          btn.className = 'subject-card text-left p-4 rounded-xl border-2 transition-all bg-white dark:bg-slate-900 border-blue-600 dark:border-blue-500 shadow-md ring-2 ring-blue-500/20';
+          btn.className = 'sub-tab px-3.5 py-1.5 rounded-lg text-xs font-bold transition whitespace-nowrap bg-white dark:bg-slate-900 text-blue-600 dark:text-blue-400 shadow-sm';
         } else {
-          btn.className = 'subject-card text-left p-4 rounded-xl border-2 transition-all bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:border-slate-400';
+          btn.className = 'sub-tab px-3.5 py-1.5 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition whitespace-nowrap';
         }
       });
 
       // Update Subject Banner
       document.getElementById('currentSubjectCode').innerText = sub.code;
-      document.getElementById('currentPaperCode').innerText = `Paper Code: ${sub.paperCode}`;
+      document.getElementById('currentPaperCode').innerText = `(Code: ${sub.paperCode})`;
       document.getElementById('currentSubjectTitle').innerText = sub.title;
       document.getElementById('currentSubjectDesc').innerText = sub.desc;
       
@@ -549,13 +425,13 @@
       pillsContainer.innerHTML = '';
       sub.years.forEach(y => {
         const pill = document.createElement('button');
-        pill.className = 'px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-blue-50 dark:bg-slate-800 dark:hover:bg-slate-700/80 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition flex items-center gap-1.5';
-        pill.innerHTML = `<i class="fa-regular fa-file-pdf text-red-500"></i> ${y.year} Paper`;
+        pill.className = 'px-2.5 py-1 rounded text-xs font-semibold bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 transition flex items-center gap-1';
+        pill.innerHTML = `<i class="fa-regular fa-file-pdf text-red-500 text-[10px]"></i> ${y.year}`;
         pill.onclick = () => openPdfModal(y.pdf, `${sub.code}: ${sub.title} — ${y.year} Solved Paper`);
         pillsContainer.appendChild(pill);
       });
 
-      // Load Questions HTML Content
+      // Render Subject HTML Content
       renderSubjectContent(sub.contentHtml);
     }
 
@@ -577,7 +453,6 @@
         }
       });
 
-      // Apply current filters
       applyFilters();
     }
 
@@ -586,9 +461,9 @@
       currentSectionFilter = sec;
       document.querySelectorAll('.sec-filter-btn').forEach(btn => {
         if (btn.getAttribute('data-sec') === sec) {
-          btn.className = 'sec-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-blue-600 text-white shadow-sm transition';
+          btn.className = 'sec-filter-btn px-2.5 py-1 rounded text-xs font-semibold bg-blue-600 text-white shadow-sm transition';
         } else {
-          btn.className = 'sec-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:bg-slate-100 transition';
+          btn.className = 'sec-filter-btn px-2.5 py-1 rounded text-xs font-medium bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 transition';
         }
       });
       applyFilters();
@@ -618,10 +493,9 @@
         }
       });
 
-      // Handle Section Titles visibility
       secTitles.forEach(title => {
         if (query) {
-          title.style.display = 'none'; // hide in search mode
+          title.style.display = 'none';
         } else if (currentSectionFilter === 'all') {
           title.style.display = 'block';
         } else {
@@ -642,7 +516,7 @@
       document.getElementById('noResults').style.display = (visibleCount === 0) ? 'block' : 'none';
     }
 
-    // PDF Modal
+    // PDF Modal Handlers
     function openPdfModal(pdfUrl, title) {
       document.getElementById('pdfModalTitle').innerText = title;
       document.getElementById('pdfModalDownloadLink').href = pdfUrl;
@@ -658,12 +532,7 @@
       document.body.style.overflow = '';
     }
 
-    // Close on ESC
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closePdfModal();
-    });
-
-    // Boot on DBMS
+    // Initialize Default
     selectSubject('dbms');
   </script>
 
