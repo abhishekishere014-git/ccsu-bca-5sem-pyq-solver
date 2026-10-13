@@ -38,16 +38,61 @@ def clean_latex(html_text):
     if not html_text:
         return ""
     t = html_text
+
+    # 1. Spacing tokens
+    t = re.sub(r'\\qquad', '&nbsp;&nbsp;&nbsp;&nbsp;', t)
+    t = re.sub(r'\\quad', '&nbsp;&nbsp;', t)
+    t = re.sub(r'\\[,;!]', ' ', t)
+
+    # 2. Left / Right brackets
+    t = re.sub(r'\\left\[', '[', t)
+    t = re.sub(r'\\right\]', ']', t)
+    t = re.sub(r'\\left\(', '(', t)
+    t = re.sub(r'\\right\)', ')', t)
+    t = re.sub(r'\\left\\\{', '{', t)
+    t = re.sub(r'\\right\\\}', '}', t)
+    t = re.sub(r'\\left\|', '|', t)
+    t = re.sub(r'\\right\|', '|', t)
+    t = re.sub(r'\\left\.', '', t)
+    t = re.sub(r'\\right\.', '', t)
+
+    # 3. Fractions: iterative resolution
+    while r'\frac' in t:
+        new_t = re.sub(r'\\frac\{([^{}]+)\}\{([^{}]+)\}', r'(\1)/(\2)', t)
+        if new_t == t:
+            new_t = re.sub(r'\\frac\s*([0-9a-zA-Z])\s*([0-9a-zA-Z])', r'(\1)/(\2)', t)
+            if new_t == t:
+                new_t = re.sub(r'\\frac', '', t)
+        t = new_t
+
+    # 4. Functions & Operators
+    t = re.sub(r'\\tan\^\{-1\}', 'tan<sup>-1</sup>', t)
+    t = re.sub(r'\\sin\^\{-1\}', 'sin<sup>-1</sup>', t)
+    t = re.sub(r'\\cos\^\{-1\}', 'cos<sup>-1</sup>', t)
+    t = re.sub(r'\\tan', 'tan', t)
+    t = re.sub(r'\\sin', 'sin', t)
+    t = re.sub(r'\\cos', 'cos', t)
+    t = re.sub(r'\\log', 'log', t)
+    t = re.sub(r'\\ln', 'ln', t)
+    t = re.sub(r'\\exp', 'exp', t)
+
+    # 5. Greek, Set, & Relational symbols
     t = re.sub(r'\\Delta', '&Delta;', t)
     t = re.sub(r'\\nabla', '&nabla;', t)
     t = re.sub(r'\\approx', '&approx;', t)
+    t = re.sub(r'\\neq', '&ne;', t)
     t = re.sub(r'\\le\b', '&le;', t)
     t = re.sub(r'\\ge\b', '&ge;', t)
     t = re.sub(r'\\times', '&times;', t)
     t = re.sub(r'\\cdot', '&bull;', t)
-    t = re.sub(r'\\mathbf\{([^}]+)\}', r'<b>\1</b>', t)
-    t = re.sub(r'\\text\{([^}]+)\}', r'\1', t)
-    t = re.sub(r'\\frac\{([^}]+)\}\{([^}]+)\}', r'(\1)/(\2)', t)
+    t = re.sub(r'\\dots', '&hellip;', t)
+    t = re.sub(r'\\cdots', '&hellip;', t)
+    t = re.sub(r'\\implies', '&rArr;', t)
+    t = re.sub(r'\\leftrightarrow', '&harr;', t)
+    t = re.sub(r'\\to\b', '&rarr;', t)
+    t = re.sub(r'\\lambda', '&lambda;', t)
+    t = re.sub(r'\\xi', '&xi;', t)
+    t = re.sub(r'\\prod', '&prod;', t)
     t = re.sub(r'\\sum', '&Sigma;', t)
     t = re.sub(r'\\int', '&int;', t)
     t = re.sub(r'\\sqrt\{([^}]+)\}', r'&radic;(\1)', t)
@@ -59,8 +104,21 @@ def clean_latex(html_text):
     t = re.sub(r'\\rho', '&rho;', t)
     t = re.sub(r'\\in\b', '&isin;', t)
     t = re.sub(r'\\infty', '&infin;', t)
-    t = re.sub(r'\^2\b', '<sup>2</sup>', t)
-    t = re.sub(r'\^3\b', '<sup>3</sup>', t)
+    t = re.sub(r'\\mathbf\{([^}]+)\}', r'<b>\1</b>', t)
+    t = re.sub(r'\\text\{([^}]+)\}', r'\1', t)
+
+    # 6. Matrix & Array clean conversion
+    t = re.sub(r'\\begin\{(?:matrix|array|pmatrix|bmatrix)\}(.*?)\\end\{(?:matrix|array|pmatrix|bmatrix)\}', 
+               lambda m: '<table class="grid-table">' + ''.join('<tr>' + ''.join(f'<td>{c.strip()}</td>' for c in row.split('&')) + '</tr>' for row in m.group(1).split(r'\\') if row.strip()) + '</table>', 
+               t, flags=re.DOTALL)
+
+    # 7. Subscripts & Superscripts
+    t = re.sub(r'_\{([^}]+)\}', r'<sub>\1</sub>', t)
+    t = re.sub(r'\^\{([^}]+)\}', r'<sup>\1</sup>', t)
+    t = re.sub(r'_([0-9a-zA-Z])\b', r'<sub>\1</sub>', t)
+    t = re.sub(r'\^([0-9a-zA-Z])\b', r'<sup>\1</sup>', t)
+
+    # 8. Clean leftover math tags
     t = re.sub(r'<span class="math">\\text\{([^}]+)\} = ([^<]+)</span>', r'<b>\1</b> = \2', t)
     t = re.sub(r'<span class="math">(.*?)</span>', r'<code>\1</code>', t)
     t = re.sub(r'\$([^$]+)\$', r'<code>\1</code>', t)

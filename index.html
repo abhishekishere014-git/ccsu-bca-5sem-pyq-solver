@@ -16,6 +16,11 @@
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+  <!-- KaTeX for crisp mathematical typography -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -31,108 +36,149 @@
   </script>
 
   <style>
-    /* Minimalist styling for questions and content */
+    /* Modern, High-Legibility Typography & Text Formatting */
     .sec-title {
-      background: #f8fafc;
-      border-left: 3px solid #2563eb;
-      padding: 6px 12px;
-      font-size: 0.95rem;
-      font-weight: 700;
+      background: #f1f5f9;
+      border-left: 4px solid #2563eb;
+      padding: 10px 16px;
+      font-size: 1rem;
+      font-weight: 800;
       color: #0f172a;
-      margin: 20px 0 12px 0;
-      border-radius: 0 4px 4px 0;
+      margin: 28px 0 16px 0;
+      border-radius: 0 6px 6px 0;
+      letter-spacing: -0.01em;
     }
     .dark .sec-title {
       background: #1e293b;
       border-left-color: #38bdf8;
-      color: #f1f5f9;
+      color: #f8fafc;
     }
 
     .q-box {
       background: #ffffff;
       border: 1px solid #e2e8f0;
-      border-radius: 8px;
-      padding: 16px 18px;
-      margin-bottom: 14px;
-      transition: border-color 0.15s ease;
+      border-radius: 10px;
+      padding: 20px 22px;
+      margin-bottom: 18px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
     }
     .dark .q-box {
       background: #0f172a;
       border-color: #1e293b;
       color: #cbd5e1;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
     }
     .q-box:hover {
       border-color: #cbd5e1;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
     }
     .dark .q-box:hover {
       border-color: #334155;
     }
 
     .q-title {
-      font-size: 1rem;
+      font-size: 1.05rem;
       font-weight: 700;
       color: #0f172a;
-      margin-bottom: 8px;
-      line-height: 1.45;
+      margin-bottom: 10px;
+      line-height: 1.5;
+      letter-spacing: -0.01em;
     }
     .dark .q-title {
       color: #f8fafc;
     }
 
     .badge {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
       background: #eff6ff;
-      color: #1d4ed8;
+      color: #1e40af;
       font-size: 0.72rem;
       font-weight: 700;
-      padding: 1px 7px;
-      border-radius: 4px;
+      padding: 2px 8px;
+      border-radius: 5px;
       border: 1px solid #bfdbfe;
-      margin-right: 6px;
+      margin-right: 8px;
+      vertical-align: middle;
     }
     .dark .badge {
-      background: rgba(56, 189, 248, 0.15);
+      background: rgba(30, 64, 175, 0.25);
+      color: #93c5fd;
+      border-color: rgba(96, 165, 250, 0.3);
+    }
+
+    .q-marks {
+      display: inline-block;
+      background: #f8fafc;
+      color: #0f172a;
+      font-size: 0.74rem;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 5px;
+      border: 1px solid #cbd5e1;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+    .dark .q-marks {
+      background: #1e293b;
       color: #38bdf8;
-      border-color: rgba(56, 189, 248, 0.3);
+      border-color: #334155;
     }
 
     .step-label {
       font-weight: 700;
-      color: #1e3a8a;
-      margin: 10px 0 4px 0;
-      font-size: 0.9rem;
+      color: #1d4ed8;
+      margin: 14px 0 6px 0;
+      font-size: 0.94rem;
+      display: block;
+      letter-spacing: -0.01em;
     }
     .dark .step-label {
       color: #60a5fa;
     }
 
-    .q-marks {
-      display: inline-block;
-      background: #eff6ff;
-      color: #1d4ed8;
-      font-size: 0.75rem;
-      font-weight: 700;
-      padding: 1px 6px;
-      border-radius: 4px;
-      border: 1px solid #bfdbfe;
-      margin-left: 6px;
+    .ans-body {
+      font-size: 0.935rem;
+      line-height: 1.7;
+      color: #334155;
+      margin-top: 10px;
     }
-    .dark .q-marks {
-      background: rgba(56, 189, 248, 0.15);
-      color: #38bdf8;
-      border-color: rgba(56, 189, 248, 0.3);
+    .dark .ans-body {
+      color: #cbd5e1;
+    }
+    .ans-body p {
+      margin: 8px 0;
+    }
+    .ans-body ul, .ans-body ol {
+      margin: 8px 0 12px 0;
+      padding-left: 24px;
+    }
+    .ans-body li {
+      margin-bottom: 5px;
+      line-height: 1.6;
+    }
+    .ans-body strong, .ans-body b {
+      color: #0f172a;
+      font-weight: 700;
+    }
+    .dark .ans-body strong, .dark .ans-body b {
+      color: #f8fafc;
     }
 
-    .info-box, .diagram-card, .math-box {
+    .info-box, .diagram-card, .math-box, .step-box {
       background: #f8fafc;
-      border-left: 3px solid #2563eb;
-      padding: 8px 12px;
-      margin: 8px 0;
-      border-radius: 0 4px 4px 0;
-      font-size: 0.88rem;
+      border: 1px solid #e2e8f0;
+      border-left: 4px solid #2563eb;
+      padding: 12px 16px;
+      margin: 12px 0;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.91rem;
+      line-height: 1.65;
     }
-    .dark .info-box, .dark .diagram-card, .dark .math-box {
+    .dark .info-box, .dark .diagram-card, .dark .math-box, .dark .step-box {
       background: #111827;
+      border-color: #1e293b;
       border-left-color: #38bdf8;
       color: #cbd5e1;
     }
@@ -140,16 +186,22 @@
     table.data-table, table.iter-table, table.grid-table {
       width: 100%;
       border-collapse: collapse;
-      margin: 8px 0;
-      font-size: 0.82rem;
+      margin: 14px 0;
+      font-size: 0.85rem;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid #cbd5e1;
     }
     table.data-table th, table.iter-table th, table.grid-table th {
       background: #f1f5f9;
       color: #0f172a;
       font-weight: 700;
-      padding: 5px 8px;
+      padding: 8px 12px;
       border: 1px solid #cbd5e1;
       text-align: left;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
     }
     .dark table.data-table th, .dark table.iter-table th, .dark table.grid-table th {
       background: #1e293b;
@@ -157,12 +209,14 @@
       border-color: #334155;
     }
     table.data-table td, table.iter-table td, table.grid-table td {
-      padding: 5px 8px;
+      padding: 8px 12px;
       border: 1px solid #e2e8f0;
       vertical-align: top;
+      line-height: 1.5;
     }
     .dark table.data-table td, .dark table.iter-table td, .dark table.grid-table td {
       border-color: #1e293b;
+      color: #cbd5e1;
     }
     table.data-table tr:nth-child(even) td, table.iter-table tr:nth-child(even) td {
       background: #fbfcfd;
@@ -174,38 +228,42 @@
     .code-box, pre {
       background-color: #0f172a;
       color: #f8fafc;
-      padding: 10px 14px;
-      border-radius: 6px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.82rem;
-      line-height: 1.45;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-family: 'JetBrains Mono', Consolas, monospace;
+      font-size: 0.83rem;
+      line-height: 1.55;
       overflow-x: auto;
-      margin: 8px 0;
+      margin: 12px 0;
       border: 1px solid #1e293b;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
     }
 
     code {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
+      font-family: 'JetBrains Mono', Consolas, monospace;
+      font-size: 0.83rem;
       background: #f1f5f9;
       color: #0f172a;
-      padding: 1px 4px;
-      border-radius: 3px;
+      padding: 2px 5px;
+      border-radius: 4px;
+      border: 1px solid #e2e8f0;
     }
     .dark code {
       background: #1e293b;
       color: #38bdf8;
+      border-color: #334155;
     }
     pre code {
       background: transparent;
-      color: #f8fafc;
+      color: inherit;
+      border: none;
       padding: 0;
     }
 
     hr {
       border: 0;
       border-top: 1px solid #e2e8f0;
-      margin: 14px 0;
+      margin: 18px 0;
     }
     .dark hr {
       border-top-color: #1e293b;
@@ -481,6 +539,26 @@
       const container = document.getElementById('questionsContainer');
       container.innerHTML = html;
       applyFilters();
+      renderMath();
+    }
+
+    function renderMath() {
+      if (window.renderMathInElement) {
+        const container = document.getElementById('questionsContainer');
+        if (container) {
+          try {
+            renderMathInElement(container, {
+              delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '$', right: '$', display: false}
+              ],
+              throwOnError: false
+            });
+          } catch (e) {
+            console.warn('Math rendering fallback:', e);
+          }
+        }
+      }
     }
 
     // Section Filter
