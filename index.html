@@ -278,18 +278,25 @@
           </div>
         </div>
 
-          <!-- Master Deduplicated Question Bank Button -->
-          <button onclick="openPdfModal('pdfs/CCSU_BCA_5_SEM_DEDUPLICATED_PYQ_MASTER_QUESTION_BANK.pdf', 'Master Deduplicated Question Bank (All PYQ with Year Stamps)')" 
-            class="flex items-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white text-xs sm:text-sm font-bold px-3 sm:px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition">
-            <i class="fa-solid fa-stamp"></i>
-            <span>Deduplicated PYQ Bank (Year Stamped)</span>
-          </button>
+          <!-- Master Deduplicated Question Bank Buttons -->
+          <div class="hidden sm:flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl border border-slate-200 dark:border-slate-700">
+            <button onclick="openPdfModal('pdfs/CCSU_BCA_5_SEM_DEDUPLICATED_PYQ_MASTER_QUESTION_BANK.pdf', 'Master Deduplicated Question Bank (Standard Edition)')" 
+              class="flex items-center gap-1.5 bg-white dark:bg-slate-900 hover:bg-slate-50 text-slate-800 dark:text-slate-100 text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm border border-slate-200 dark:border-slate-700 transition">
+              <i class="fa-solid fa-file-pdf text-purple-600"></i>
+              <span>Deduplicated PYQ</span>
+            </button>
+            <button onclick="openPdfModal('pdfs/CCSU_BCA_5_SEM_DEDUPLICATED_PYQ_MASTER_QUESTION_BANK_EYE_COMFORT_DARK_EDITION.pdf', 'Master Deduplicated Question Bank (🌙 Eye-Comfort Night Edition)')" 
+              class="flex items-center gap-1.5 bg-gradient-to-r from-slate-900 to-indigo-950 hover:from-slate-800 hover:to-indigo-900 text-sky-400 text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm border border-slate-700 transition">
+              <i class="fa-solid fa-moon text-amber-400"></i>
+              <span>Eye-Comfort (Dark)</span>
+            </button>
+          </div>
 
           <!-- Master Book Download -->
           <button onclick="openPdfModal('pdfs/CCSU_BCA_5_SEM_ALL_SUBJECTS_SOLVED_MASTER_BOOK.pdf', 'Master Solved Book (All 4 Subjects)')" 
             class="hidden md:flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white text-xs sm:text-sm font-semibold px-3 sm:px-4 py-2 rounded-lg shadow-sm transition">
             <i class="fa-solid fa-book-bookmark"></i>
-            <span>Master Solved Book</span>
+            <span>Master Book</span>
           </button>
 
           <!-- GitHub Link -->
@@ -327,12 +334,16 @@
       <!-- QUICK MASTER DOWNLOAD BANNER -->
       <div class="mt-6 inline-flex flex-wrap items-center justify-center gap-3 bg-gradient-to-r from-purple-50 via-indigo-50 to-blue-50 dark:from-purple-950/30 dark:via-indigo-950/30 dark:to-blue-950/30 border border-purple-200 dark:border-purple-800/60 p-3 sm:p-4 rounded-2xl shadow-sm">
         <span class="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2">
-          <i class="fa-solid fa-file-pdf text-purple-600 text-lg"></i>
+          <i class="fa-solid fa-layer-group text-purple-600 text-lg"></i>
           Master Deduplicated Question Bank (2013–2025):
         </span>
-        <button onclick="openPdfModal('pdfs/CCSU_BCA_5_SEM_DEDUPLICATED_PYQ_MASTER_QUESTION_BANK.pdf', 'Master Deduplicated Question Bank (All PYQ with Year Stamps)')"
+        <button onclick="openPdfModal('pdfs/CCSU_BCA_5_SEM_DEDUPLICATED_PYQ_MASTER_QUESTION_BANK.pdf', 'Master Deduplicated Question Bank (Standard Edition)')"
           class="bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs sm:text-sm px-4 py-1.5 rounded-lg shadow transition flex items-center gap-2">
-          <i class="fa-solid fa-download"></i> View / Download 78-Page Master PDF
+          <i class="fa-solid fa-file-pdf"></i> Standard Print Edition
+        </button>
+        <button onclick="openPdfModal('pdfs/CCSU_BCA_5_SEM_DEDUPLICATED_PYQ_MASTER_QUESTION_BANK_EYE_COMFORT_DARK_EDITION.pdf', 'Master Deduplicated Question Bank (🌙 Eye-Comfort Night Edition)')"
+          class="bg-slate-900 hover:bg-slate-800 text-sky-400 font-bold text-xs sm:text-sm px-4 py-1.5 rounded-lg shadow border border-slate-700 transition flex items-center gap-2">
+          <i class="fa-solid fa-moon text-amber-400"></i> 🌙 Eye-Comfort Night Edition
         </button>
       </div>
 
