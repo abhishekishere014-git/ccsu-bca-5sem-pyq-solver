@@ -214,6 +214,9 @@
       vertical-align: top;
       line-height: 1.5;
     }
+    table.grid-table th, table.grid-table td, table.iter-table th, table.iter-table td {
+      text-align: center;
+    }
     .dark table.data-table td, .dark table.iter-table td, .dark table.grid-table td {
       border-color: #1e293b;
       color: #cbd5e1;
@@ -223,6 +226,23 @@
     }
     .dark table.data-table tr:nth-child(even) td, .dark table.iter-table tr:nth-child(even) td {
       background: #131d31;
+    }
+
+    .result-box {
+      background: #ecfdf5;
+      border: 1.5px solid #10b981;
+      padding: 10px 16px;
+      margin: 12px 0;
+      border-radius: 6px;
+      font-weight: 700;
+      color: #065f46;
+      display: inline-block;
+    }
+    .dark .result-box {
+      background: rgba(16, 185, 129, 0.12) !important;
+      border-color: rgba(52, 211, 153, 0.4) !important;
+      color: #34d399 !important;
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.15) !important;
     }
 
     .code-box, pre, .diagram-box {
@@ -249,7 +269,7 @@
       border-color: #1e293b;
     }
 
-    .math-expr {
+    .math-expr, code {
       display: inline-block;
       font-family: 'JetBrains Mono', Consolas, 'Courier New', monospace;
       font-size: 0.85rem;
@@ -261,28 +281,11 @@
       border: 1px solid #bfdbfe;
       margin: 2px 1px;
     }
-    .dark .math-expr {
-      background: rgba(56, 189, 248, 0.15);
-      color: #38bdf8;
-      border: 1px solid rgba(56, 189, 248, 0.35);
-      box-shadow: 0 0 10px rgba(56, 189, 248, 0.15);
-    }
-
-    code {
-      font-family: 'JetBrains Mono', Consolas, monospace;
-      font-size: 0.84rem;
-      background: #eff6ff;
-      color: #1d4ed8;
-      padding: 2px 6px;
-      border-radius: 4px;
-      border: 1px solid #bfdbfe;
-      display: inline-block;
-    }
-    .dark code {
-      background: rgba(56, 189, 248, 0.15);
-      color: #38bdf8;
-      border: 1px solid rgba(56, 189, 248, 0.35);
-      box-shadow: 0 0 10px rgba(56, 189, 248, 0.15);
+    .dark .math-expr, .dark code {
+      background: rgba(14, 165, 233, 0.18) !important;
+      color: #38bdf8 !important;
+      border: 1px solid rgba(56, 189, 248, 0.45) !important;
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.25) !important;
     }
     pre code, .diagram-box code {
       background: transparent !important;
@@ -500,7 +503,7 @@
   </footer>
 
   <!-- SCRIPT -->
-  <script src="data.js"></script>
+  <script src="data.js?v=20261013_1750"></script>
   <script>
     let currentSubjectKey = 'dbms';
     let currentSectionFilter = 'all';

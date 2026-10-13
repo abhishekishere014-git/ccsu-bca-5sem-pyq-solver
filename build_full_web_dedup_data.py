@@ -6,6 +6,7 @@ from enrich_java import JAVA_ENRICHMENTS
 from enrich_networks import NETWORKS_ENRICHMENTS
 from enrich_dbms import DBMS_ENRICHMENTS
 from enrich_nm import NM_ENRICHMENTS
+from enrich_nm_complete import NM_COMPLETE_ENRICHMENTS
 from enrich_all_remaining import ALL_ADDITIONAL_ENRICHMENTS
 
 # Merge and update all enrichment dictionaries
@@ -23,7 +24,7 @@ ALL_DBMS['bcnf (boyce-codd normal form)'] = ALL_DBMS.pop('boyce-codd normal form
 ALL_DBMS['grant and revoke'] = ALL_DBMS.pop('database security and authorization: grant and revoke', '')
 ALL_DBMS['query optimization'] = ALL_DBMS.pop('query optimization and heuristic optimization', '')
 
-ALL_NM = {**NM_ENRICHMENTS}
+ALL_NM = {**NM_ENRICHMENTS, **NM_COMPLETE_ENRICHMENTS}
 
 # Distribute additional enrichments into subjects
 for k, v in ALL_ADDITIONAL_ENRICHMENTS.items():
@@ -118,13 +119,18 @@ def clean_latex(html_text):
     t = re.sub(r'_([0-9a-zA-Z])\b', r'<sub>\1</sub>', t)
     t = re.sub(r'\^([0-9a-zA-Z])\b', r'<sup>\1</sup>', t)
 
-    # 8. Clean leftover math tags into math-expr (NOT code pills!)
+    # 8. Clean leftover math tags into math-expr
     t = re.sub(r'<span class="math">\\text\{([^}]+)\} = ([^<]+)</span>', r'<b>\1</b> = \2', t)
     t = re.sub(r'<span class="math">(.*?)</span>', r'<span class="math-expr">\1</span>', t)
     t = re.sub(r'\$([^$]+)\$', r'<span class="math-expr">\1</span>', t)
 
     # 9. Ensure ASCII diagrams are strictly pre tags so spaces and newlines are preserved
     t = re.sub(r'<div class="diagram-box">(.*?)</div>', r'<pre class="diagram-box">\1</pre>', t, flags=re.DOTALL)
+    
+    # 10. Fix common character artifacts
+    t = t.replace('???', '&int;<sub>0</sub><sup>1</sup>')
+    t = t.replace('?12', '&radic;12')
+    t = re.sub(r'<span class="math-expr">\s*(<table[^>]*>.*?</table>)\s*</span>', r'\1', t, flags=re.DOTALL)
     return t
 
 def build_data_js():
@@ -239,7 +245,7 @@ def build_data_js():
         for c in clusters:
             t_low = c["canonical_title"].lower()
             for ek, ev in enrich_dict.items():
-                if ek.lower() in t_low and len(ev) > len(c["best_answer"]):
+                if ek.lower() in t_low:
                     c["best_answer"] = ev
                     break
             # Clean LaTeX in title and answer
