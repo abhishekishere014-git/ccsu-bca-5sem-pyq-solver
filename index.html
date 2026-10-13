@@ -250,37 +250,47 @@
     }
 
     .math-expr {
+      display: inline-block;
       font-family: 'JetBrains Mono', Consolas, 'Courier New', monospace;
-      font-size: 0.9em;
+      font-size: 0.85rem;
       font-weight: 600;
+      background: #eff6ff;
       color: #1d4ed8;
-      background: transparent !important;
-      border: none !important;
-      padding: 0 1px !important;
+      padding: 2px 7px;
+      border-radius: 4px;
+      border: 1px solid #bfdbfe;
+      margin: 2px 1px;
     }
     .dark .math-expr {
-      color: #93c5fd !important;
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.15);
     }
 
     code {
       font-family: 'JetBrains Mono', Consolas, monospace;
-      font-size: 0.83rem;
-      background: #f1f5f9;
-      color: #0f172a;
-      padding: 1px 5px;
+      font-size: 0.84rem;
+      background: #eff6ff;
+      color: #1d4ed8;
+      padding: 2px 6px;
       border-radius: 4px;
-      border: 1px solid #e2e8f0;
+      border: 1px solid #bfdbfe;
+      display: inline-block;
     }
     .dark code {
-      background: #1e293b;
-      color: #cbd5e1;
-      border: 1px solid #334155;
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.15);
     }
     pre code, .diagram-box code {
       background: transparent !important;
       color: inherit !important;
       border: none !important;
       padding: 0 !important;
+      box-shadow: none !important;
+      display: inline !important;
     }
 
     u {
