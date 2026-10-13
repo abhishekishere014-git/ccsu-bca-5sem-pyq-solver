@@ -79,6 +79,33 @@
       color: #f8fafc;
     }
 
+    .badge {
+      display: inline-block;
+      background: #eff6ff;
+      color: #1d4ed8;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 1px 7px;
+      border-radius: 4px;
+      border: 1px solid #bfdbfe;
+      margin-right: 6px;
+    }
+    .dark .badge {
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border-color: rgba(56, 189, 248, 0.3);
+    }
+
+    .step-label {
+      font-weight: 700;
+      color: #1e3a8a;
+      margin: 10px 0 4px 0;
+      font-size: 0.9rem;
+    }
+    .dark .step-label {
+      color: #60a5fa;
+    }
+
     .q-marks {
       display: inline-block;
       background: #eff6ff;
@@ -317,11 +344,11 @@
       </div>
 
       <!-- Section Filter Pills -->
-      <div class="flex items-center gap-1 overflow-x-auto w-full sm:w-auto">
-        <button onclick="filterSection('all')" class="sec-filter-btn px-2.5 py-1 rounded text-xs font-semibold bg-blue-600 text-white shadow-sm transition" data-sec="all">All (13)</button>
-        <button onclick="filterSection('sec-a')" class="sec-filter-btn px-2.5 py-1 rounded text-xs font-medium bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 transition" data-sec="sec-a">Sec A (3M)</button>
-        <button onclick="filterSection('sec-b')" class="sec-filter-btn px-2.5 py-1 rounded text-xs font-medium bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 transition" data-sec="sec-b">Sec B (7.5M)</button>
-        <button onclick="filterSection('sec-c')" class="sec-filter-btn px-2.5 py-1 rounded text-xs font-medium bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 transition" data-sec="sec-c">Sec C (15M)</button>
+      <div id="secFilterContainer" class="flex items-center gap-1 overflow-x-auto w-full sm:w-auto">
+        <button onclick="filterSection('all')" class="sec-filter-btn px-2.5 py-1 rounded text-xs font-semibold bg-blue-600 text-white shadow-sm transition" data-sec="all">All (80)</button>
+        <button onclick="filterSection('sec-c')" class="sec-filter-btn px-2.5 py-1 rounded text-xs font-medium bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 transition" data-sec="sec-c">Sec C (15M &bull; 38)</button>
+        <button onclick="filterSection('sec-b')" class="sec-filter-btn px-2.5 py-1 rounded text-xs font-medium bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 transition" data-sec="sec-b">Sec B (7.5M &bull; 19)</button>
+        <button onclick="filterSection('sec-a')" class="sec-filter-btn px-2.5 py-1 rounded text-xs font-medium bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 transition" data-sec="sec-a">Sec A (3M &bull; 23)</button>
       </div>
 
     </div>
@@ -398,10 +425,14 @@
     // Select Subject
     function selectSubject(key) {
       currentSubjectKey = key;
+      currentSectionFilter = 'all';
+      const searchInput = document.getElementById('questionSearch');
+      if (searchInput) searchInput.value = '';
+
       const sub = SUBJECTS_DATA[key];
       if (!sub) return;
 
-      // Update Tab Styles
+      // Update Tab Styles (Strict Subject Isolation)
       ['dbms', 'java', 'networks', 'numerical'].forEach(k => {
         const btn = document.getElementById(`btn-${k}`);
         if (k === key) {
@@ -431,6 +462,17 @@
         pillsContainer.appendChild(pill);
       });
 
+      // Update Section Filter Pills with Dynamic Question Counts
+      const secFilterContainer = document.getElementById('secFilterContainer');
+      if (secFilterContainer && sub.counts) {
+        secFilterContainer.innerHTML = `
+          <button onclick="filterSection('all')" class="sec-filter-btn px-2.5 py-1 rounded text-xs font-semibold bg-blue-600 text-white shadow-sm transition" data-sec="all">All (${sub.counts.total})</button>
+          <button onclick="filterSection('sec-c')" class="sec-filter-btn px-2.5 py-1 rounded text-xs font-medium bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 transition" data-sec="sec-c">Sec C (15M &bull; ${sub.counts.sec_c})</button>
+          <button onclick="filterSection('sec-b')" class="sec-filter-btn px-2.5 py-1 rounded text-xs font-medium bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 transition" data-sec="sec-b">Sec B (7.5M &bull; ${sub.counts.sec_b})</button>
+          <button onclick="filterSection('sec-a')" class="sec-filter-btn px-2.5 py-1 rounded text-xs font-medium bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 transition" data-sec="sec-a">Sec A (3M &bull; ${sub.counts.sec_a})</button>
+        `;
+      }
+
       // Render Subject HTML Content
       renderSubjectContent(sub.contentHtml);
     }
@@ -438,21 +480,6 @@
     function renderSubjectContent(html) {
       const container = document.getElementById('questionsContainer');
       container.innerHTML = html;
-      
-      // Tag sections for filtering
-      let currentSection = 'sec-a';
-      Array.from(container.children).forEach(el => {
-        if (el.classList.contains('sec-title')) {
-          const txt = el.innerText.toLowerCase();
-          if (txt.includes('section – a') || txt.includes('section - a')) currentSection = 'sec-a';
-          else if (txt.includes('section – b') || txt.includes('section - b')) currentSection = 'sec-b';
-          else if (txt.includes('section – c') || txt.includes('section - c')) currentSection = 'sec-c';
-        }
-        if (el.classList.contains('q-box')) {
-          el.setAttribute('data-section', currentSection);
-        }
-      });
-
       applyFilters();
     }
 
@@ -499,16 +526,8 @@
         } else if (currentSectionFilter === 'all') {
           title.style.display = 'block';
         } else {
-          const txt = title.innerText.toLowerCase();
-          if (
-            (currentSectionFilter === 'sec-a' && txt.includes('section – a')) ||
-            (currentSectionFilter === 'sec-b' && txt.includes('section – b')) ||
-            (currentSectionFilter === 'sec-c' && txt.includes('section – c'))
-          ) {
-            title.style.display = 'block';
-          } else {
-            title.style.display = 'none';
-          }
+          const sec = title.getAttribute('data-sec');
+          title.style.display = (sec === currentSectionFilter) ? 'block' : 'none';
         }
       });
 

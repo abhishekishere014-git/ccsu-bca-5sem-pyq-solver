@@ -155,8 +155,16 @@ def load_and_cluster():
                     "best_answer": ans_html
                 })
 
-    # Finalize clusters
+    # Finalize clusters and apply exam-style enrichments
+    try:
+        from build_full_web_dedup_data import ALL_DBMS, ALL_JAVA, ALL_NETWORKS, ALL_NM, clean_latex
+        enrich_map = {"DBMS": ALL_DBMS, "Java": ALL_JAVA, "Networks": ALL_NETWORKS, "NM": ALL_NM}
+    except Exception as e:
+        enrich_map = {}
+        clean_latex = lambda x: x
+
     for sub, sdata in subject_map.items():
+        enrich_dict = enrich_map.get(sub, {})
         for c in sdata["clusters"]:
             c["year_list"] = sorted(list(c["years"]), key=lambda y: int(re.sub(r'\D', '', y)) if re.sub(r'\D', '', y) else 0, reverse=True)
             c["count"] = len(c["year_list"])
@@ -164,11 +172,19 @@ def load_and_cluster():
             marks_nums = [float(re.sub(r'[^\d.]', '', m)) for m in c["marks"] if re.sub(r'[^\d.]', '', m)]
             c["max_marks"] = max(marks_nums) if marks_nums else 3.0
             c["marks_display"] = " / ".join(sorted(list(c["marks"])))
+
+            # Apply enrichment if available
+            t_low = c["canonical_title"].lower()
+            for ek, ev in enrich_dict.items():
+                if ek.lower() in t_low and len(ev) > len(c["best_answer"]):
+                    c["best_answer"] = ev
+                    break
+
+            # Clean LaTeX
+            c["canonical_title"] = clean_latex(c["canonical_title"])
+            c["best_answer"] = clean_latex(c["best_answer"])
             
         # Sort subject clusters:
-        # Group into 3 categories:
-        # Long (>= 15M), Medium (7.5M), Short (<= 3M)
-        # Inside each category, sort by repetition count (descending)
         sdata["clusters"].sort(key=lambda x: (x["count"], x["max_marks"]), reverse=True)
         
     return subject_map
