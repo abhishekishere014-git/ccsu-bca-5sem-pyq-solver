@@ -118,10 +118,13 @@ def clean_latex(html_text):
     t = re.sub(r'_([0-9a-zA-Z])\b', r'<sub>\1</sub>', t)
     t = re.sub(r'\^([0-9a-zA-Z])\b', r'<sup>\1</sup>', t)
 
-    # 8. Clean leftover math tags
+    # 8. Clean leftover math tags into math-expr (NOT code pills!)
     t = re.sub(r'<span class="math">\\text\{([^}]+)\} = ([^<]+)</span>', r'<b>\1</b> = \2', t)
-    t = re.sub(r'<span class="math">(.*?)</span>', r'<code>\1</code>', t)
-    t = re.sub(r'\$([^$]+)\$', r'<code>\1</code>', t)
+    t = re.sub(r'<span class="math">(.*?)</span>', r'<span class="math-expr">\1</span>', t)
+    t = re.sub(r'\$([^$]+)\$', r'<span class="math-expr">\1</span>', t)
+
+    # 9. Ensure ASCII diagrams are strictly pre tags so spaces and newlines are preserved
+    t = re.sub(r'<div class="diagram-box">(.*?)</div>', r'<pre class="diagram-box">\1</pre>', t, flags=re.DOTALL)
     return t
 
 def build_data_js():
