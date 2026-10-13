@@ -275,7 +275,6 @@ def build_data_js():
         {c['best_answer']}
     </div>
 </div>
-<hr>
 ''')
 
         # Render Section C first (High value 15M questions)
